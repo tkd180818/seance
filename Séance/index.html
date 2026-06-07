@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Séance — Annoyz</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:white;
+    color:black;
+    font-family:'Cormorant Garamond', serif;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+    padding:60px 24px 100px;
+}
+
+.title{
+    font-size:clamp(5rem,14vw,11rem);
+    line-height:.85;
+    font-weight:300;
+    margin-bottom:40px;
+}
+
+.artwork{
+    width:100%;
+    max-width:500px;
+    display:block;
+    margin:0 auto 40px;
+}
+
+.artist{
+    font-size:2rem;
+    margin-bottom:50px;
+}
+
+.countdown{
+    font-size:clamp(2rem,5vw,4rem);
+    letter-spacing:.08em;
+    margin-bottom:70px;
+}
+
+.ep{
+    font-size:2.2rem;
+    margin-bottom:25px;
+}
+
+.tracklist{
+    list-style:none;
+    font-size:2rem;
+    line-height:1.7;
+    margin-bottom:80px;
+}
+
+.credits{
+    font-size:1.4rem;
+    line-height:1.8;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="title">Séance</h1>
+
+    <img src="artwork.jpg" class="artwork" alt="Séance Artwork">
+
+    <div class="artist">
+        by Annoyz
+    </div>
+
+    <div id="countdown" class="countdown">
+        Loading...
+    </div>
+
+    <div class="ep">
+        EP 2
+    </div>
+
+    <ul class="tracklist">
+        <li>1. Séance</li>
+        <li>2. Munch</li>
+        <li>3. Husk</li>
+        <li>4. Ouija</li>
+        <li>5. Bruise</li>
+        <li>6. Shillings</li>
+    </ul>
+
+    <div class="credits">
+        Written and Mixed by Yoichi Takada<br>
+        Mastered by Simon Lancelot
+    </div>
+
+</div>
+
+<script>
+
+// 日本時間 2026/07/01 00:00
+const releaseDate = new Date("2026-07-01T00:00:00+09:00");
+
+function updateCountdown(){
+
+    const now = new Date();
+    const diff = releaseDate - now;
+
+    if(diff <= 0){
+        document.getElementById("countdown").innerHTML = "OUT NOW";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+        (diff % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (diff % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (diff % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
